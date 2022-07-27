@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = HomePageBase.class)
 public class HomePage extends HomePageBase implements IMobileUtils {
 
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == \"Catalog-screen\"`]/XCUIElementTypeOther[1]")
+    private ExtendedWebElement title;
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'Catalog-screen`]/XCUIElementTypeOther[3]")
     private ExtendedWebElement catalog;
 
@@ -28,7 +30,7 @@ public class HomePage extends HomePageBase implements IMobileUtils {
 
     @Override
     public boolean isHomePageOpen() {
-        return catalog.isElementPresent();
+        return title.isElementPresent();
     }
 
     @Override
@@ -42,8 +44,8 @@ public class HomePage extends HomePageBase implements IMobileUtils {
         };
     }
 
-    public ProductPage openLongProduct(String title) {
-        if (swipe(product.format((title),10),50,50)) {
+    public ProductPage clickProductByIndex(String title) {
+        if (swipe(product.format((title), 10), 50, 50)) {
             product.format(title).click();
         }
         return new ProductPage(getDriver());

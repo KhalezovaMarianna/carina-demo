@@ -15,6 +15,8 @@ public class MorePage extends MorePageBase implements IMobileUtils {
     ExtendedWebElement aboutBtn;
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeButton[`name == \"Catalog-tab-item\"`]")
     ExtendedWebElement catalogBtn;
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeButton[`name == \"Drawing-menu-item\"`]")
+    ExtendedWebElement drawingBtn;
     public MorePage(WebDriver driver) {
         super(driver);
     }
@@ -27,6 +29,7 @@ public class MorePage extends MorePageBase implements IMobileUtils {
         aboutBtn.click();
         return new AboutPage(getDriver());
     }
+
     public HomePage clickCatalogBtn(){
         catalogBtn.click();
         return new HomePage(getDriver());

@@ -9,4 +9,5 @@ public abstract class ProductPageBase extends AbstractPage {
         super(driver);
     }
     public abstract boolean isProductPageOpen();
+    public abstract boolean rateProduct();
 }
