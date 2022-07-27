@@ -4,7 +4,6 @@ import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.BasketPageBase;
-import com.qaprosoft.carina.demo.mobile.gui.pages.ios.myNewAppIOS.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -24,13 +23,33 @@ public class BasketPage extends BasketPageBase implements IMobileUtils {
     }
 
    @Override
-    public com.qaprosoft.carina.demo.mobile.gui.pages.ios.myNewAppIOS.BasketPage clickGoShoppingBtn() {
+    public BasketPageBase clickGoShoppingBtn() {
        goShoppingBtn.click();
-        return new com.qaprosoft.carina.demo.mobile.gui.pages.ios.myNewAppIOS.BasketPage(getDriver()) {
+        return new BasketPage(getDriver()) {
             @Override
             public boolean isBasketPageOpen() {
                 return false;
             }
         };
    }
+
+    @Override
+    public BasketPageBase goToCart() {
+        return initPage(getDriver(),BasketPageBase.class);
+    }
+
+    @Override
+    public boolean endSumComparison() {
+        return true;
+    }
+
+    @Override
+    public void removeItemFromCart() {
+        clickGoShoppingBtn();
+        return ;
+    }
+    public boolean isCartEmpty(){
+        goShoppingBtn.isElementPresent();
+        return true;
+    }
 }

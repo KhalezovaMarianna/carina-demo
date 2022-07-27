@@ -1,7 +1,6 @@
 package com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.carina.demo.mobile.gui.pages.ios.myNewAppIOS.BasketPage;
 import org.openqa.selenium.WebDriver;
 
 public abstract class BasketPageBase extends AbstractPage {
@@ -9,5 +8,9 @@ public abstract class BasketPageBase extends AbstractPage {
         super(driver);
     }
     public abstract boolean isBasketPageOpen();
-    public abstract BasketPage clickGoShoppingBtn();
+    public abstract BasketPageBase clickGoShoppingBtn();
+    public abstract BasketPageBase goToCart();
+    public abstract boolean endSumComparison();
+    public abstract void removeItemFromCart();
+    public abstract boolean isCartEmpty();
 }

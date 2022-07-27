@@ -4,6 +4,7 @@ import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
+import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.BasketPageBase;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.HomePageBase;
 import org.openqa.selenium.WebDriver;
 
@@ -34,14 +35,10 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     }
 
     @Override
-    public BasketPage clickBasketBtn() {
+    public BasketPageBase clickBasketBtn() {
         basketBtn.click();
-        return new BasketPage(getDriver()) {
-            @Override
-            public boolean isBasketPageOpen() {
-                return basketBtn.isElementPresent();
-            }
-        };
+        return initPage(getDriver(), BasketPageBase.class);
+
     }
 
     public ProductPage clickProductByIndex(String title) {

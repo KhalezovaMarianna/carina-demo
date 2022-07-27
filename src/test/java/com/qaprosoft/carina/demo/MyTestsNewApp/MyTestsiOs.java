@@ -47,11 +47,44 @@ public class MyTestsiOs implements IAbstractTest, IMobileUtils {
     @TestLabel(name = "feature", value = {"mobile", "regression"})
     public void testRateProduct() {
         HomePage homePage = new HomePage(getDriver());
-        Assert.assertTrue(homePage.isHomePageOpen(),"HomePage isn't open");
+        Assert.assertTrue(homePage.isHomePageOpen(), "HomePage isn't open");
         ProductPage productPage = homePage.clickProductImg("3");
-        Assert.assertTrue(productPage.isProductPageOpen(),"right product isn't open");
+        Assert.assertTrue(productPage.isProductPageOpen(), "right product isn't open");
         productPage.rateProduct();
-        Assert.assertTrue(homePage.isHomePageOpen(),"rate isn't passed");
+        Assert.assertTrue(homePage.isHomePageOpen(), "rate isn't passed");
+
+    }
+
+    @Test
+    @MethodOwner(owner = "qpsdemo")
+    @TestLabel(name = "feature",value = {"mobile","regression"})
+    public void testAmountCartAdded(){
+        HomePage homePage = new HomePage(getDriver());
+        Assert.assertTrue(homePage.isHomePageOpen(), "HomePage isn't open");
+        ProductPage productPage = homePage.clickProductImg("2");
+        Assert.assertTrue(productPage.isProductPageOpen(), "right product isn't open");
+        productPage.addSeveralProducts(3);
+        productPage.addToCart();
+        BasketPageBase basketPage = productPage.goToCart();
+        Assert.assertTrue(basketPage.endSumComparison());
+
+    }
+
+
+    @Test
+    @MethodOwner(owner = "qpsdemo")
+    @TestLabel(name  = "feature",value= {"mobile", "regression"})
+    public void testRemoveItemFromCart(){
+        HomePage homePage = new HomePage(getDriver());
+        Assert.assertTrue(homePage.isHomePageOpen(), "HomePage isn't open");
+        ProductPage productPage = homePage.clickProductImg("2");
+        Assert.assertTrue(productPage.isProductPageOpen(), "right product isn't open");
+        productPage.addSeveralProducts(3);
+        productPage.addToCart();
+        BasketPageBase basketPage = productPage.goToCart();
+        basketPage.removeItemFromCart();
+         Assert.assertTrue(basketPage.isCartEmpty(),"Cart isn't empty");
+
 
     }
 }
