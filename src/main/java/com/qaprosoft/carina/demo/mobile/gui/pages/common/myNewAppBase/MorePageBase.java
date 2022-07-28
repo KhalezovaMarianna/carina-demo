@@ -8,4 +8,8 @@ public abstract class MorePageBase extends AbstractPage {
         super(driver);
     }
     public abstract boolean isMorePageOpen();
+
+    public abstract PopUpResetPageBase resetApp();
+    public abstract AboutPageBase clickAboutBtn();
+    public abstract HomePageBase clickCatalogBtn();
 }

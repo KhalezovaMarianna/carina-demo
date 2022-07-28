@@ -8,4 +8,5 @@ public abstract class AboutPageBase extends AbstractPage {
         super(driver);
     }
     public abstract boolean isAboutPageOpen();
+    public abstract HomePageBase clickBackBtn();
 }

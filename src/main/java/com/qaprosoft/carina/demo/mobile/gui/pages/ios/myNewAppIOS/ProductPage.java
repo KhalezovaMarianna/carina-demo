@@ -3,6 +3,7 @@ package com.qaprosoft.carina.demo.mobile.gui.pages.ios.myNewAppIOS;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.BasketPageBase;
+import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.MorePageBase;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.ProductPageBase;
 import org.openqa.selenium.WebDriver;
 
@@ -28,24 +29,27 @@ public class ProductPage extends ProductPageBase {
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == \"ProductDetails-screen\"`]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeButton")
     ExtendedWebElement backBtn;
 
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeButton[`name == \"More-tab-item\"`]")
+    ExtendedWebElement moreBtn;
+
     public ProductPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
     public boolean isProductPageOpen() {
-        return plusBtn.isElementPresent();
+        return addToCartBtn.isElementPresent();
     }
 
 
-    public BasketPageBase addProduct() {
+    public void addProduct() {
         plusBtn.click();
         addToCartBtn.click();
-        return initPage(getDriver(),BasketPageBase.class);
-        }
+        return;
+    }
 
     @Override
-    public BasketPage goToCart(){
+    public BasketPage goToCart() {
         basketBtn.click();
         return new BasketPage(getDriver()) {
             @Override
@@ -58,7 +62,7 @@ public class ProductPage extends ProductPageBase {
                 return null;
             }
         };
-        }
+    }
 
 
     public boolean addSeveralProducts(int amount) {
@@ -67,8 +71,15 @@ public class ProductPage extends ProductPageBase {
         }
         return true;
     }
-    public void addToCart(){
+
+    public void addToCart() {
         addToCartBtn.click();
+    }
+
+    @Override
+    public MorePageBase openMorePage() {
+    moreBtn.click();
+        return initPage(getDriver(),MorePageBase.class);
     }
 
     @Override
@@ -90,7 +101,6 @@ public class ProductPage extends ProductPageBase {
         return true;
 
     }
-
 
 
 }

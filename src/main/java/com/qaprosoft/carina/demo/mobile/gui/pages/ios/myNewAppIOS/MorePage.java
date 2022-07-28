@@ -6,6 +6,7 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.HomePageBase;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.MorePageBase;
+import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.PopUpResetPageBase;
 import org.openqa.selenium.WebDriver;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = HomePageBase.class)
@@ -17,6 +18,8 @@ public class MorePage extends MorePageBase implements IMobileUtils {
     ExtendedWebElement catalogBtn;
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeButton[`name == \"Drawing-menu-item\"`]")
     ExtendedWebElement drawingBtn;
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeStaticText[`label == \"Reset App State\"`]")
+    ExtendedWebElement resetBtn;
     public MorePage(WebDriver driver) {
         super(driver);
     }
@@ -25,6 +28,13 @@ public class MorePage extends MorePageBase implements IMobileUtils {
     public boolean isMorePageOpen() {
         return aboutBtn.isElementPresent();
     }
+
+    @Override
+    public PopUpResetPageBase resetApp() {
+        resetBtn.click();
+        return initPage(getDriver(), PopUpResetPageBase.class);
+    }
+
     public AboutPage clickAboutBtn(){
         aboutBtn.click();
         return new AboutPage(getDriver());

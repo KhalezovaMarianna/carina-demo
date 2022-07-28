@@ -7,6 +7,7 @@ import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.MyPhotoPageBase;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.BasketPageBase;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.HomePageBase;
+import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.ProductPageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -15,7 +16,6 @@ public class HomePage extends HomePageBase implements IMobileUtils {
 
     @FindBy(id = "com.saucelabs.mydemoapp.android:id/productTV")
     ExtendedWebElement catalog;
-
     @ExtendedFindBy(accessibilityId = "Displays number of items in your cart")
     ExtendedWebElement basketBtn;
 
@@ -32,6 +32,12 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     public BasketPageBase clickBasketBtn() {
         basketBtn.click();
         return new BasketPage(getDriver());
+    }
+
+    @Override
+    public ProductPageBase clickRandomProduct(String title) {
+
+        return initPage(getDriver(), ProductPageBase.class);
     }
 
 }

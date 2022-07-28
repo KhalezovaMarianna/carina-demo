@@ -3,7 +3,9 @@ package com.qaprosoft.carina.demo.mobile.gui.pages.android.myNewApp;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.BasketPageBase;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -12,6 +14,12 @@ public class BasketPage extends BasketPageBase implements IMobileUtils {
 
     @FindBy(id ="com.saucelabs.mydemoapp.android:id/shoppingBt")
     ExtendedWebElement goShoppingBtn;
+
+    @FindBy(xpath= "//android.widget.TextView[@content-desc=\"Removes product from cart\"]")
+    ExtendedWebElement removeItemBtn;
+
+    @FindBy(id = "com.saucelabs.mydemoapp.android:id/totalPriceTV")
+    ExtendedWebElement finalSum;
 
     public BasketPage(WebDriver driver) {
         super(driver);
@@ -40,7 +48,11 @@ public class BasketPage extends BasketPageBase implements IMobileUtils {
 
     @Override
     public boolean endSumComparison() {
-        return true;
+        double sum = Double.parseDouble(StringUtils.substring((finalSum.format("$39.96").getAttribute("value")), 1));
+        if (sum > 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override

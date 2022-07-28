@@ -4,6 +4,7 @@ import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.AboutPageBase;
+import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.HomePageBase;
 import org.openqa.selenium.WebDriver;
 
 public class AboutPage extends AboutPageBase implements IMobileUtils {
@@ -14,7 +15,7 @@ public class AboutPage extends AboutPageBase implements IMobileUtils {
     public AboutPage(WebDriver driver) {
         super(driver);
     }
-    public HomePage clickBackBtn(){
+    public HomePageBase clickBackBtn(){
         backBtn.click();
         return new HomePage(getDriver());
 
