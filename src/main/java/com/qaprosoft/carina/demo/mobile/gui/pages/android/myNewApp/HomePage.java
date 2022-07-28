@@ -20,6 +20,9 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     @ExtendedFindBy(accessibilityId = "Displays number of items in your cart")
     ExtendedWebElement basketBtn;
 
+    @FindBy(id = "com.saucelabs.mydemoapp.android:id/menuIV")
+    ExtendedWebElement moreBtn;
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -31,7 +34,8 @@ public class HomePage extends HomePageBase implements IMobileUtils {
 
     @Override
     public MorePageBase clickMoreBtn() {
-        return null;
+        moreBtn.click();
+        return initPage(getDriver(),MorePageBase.class);
     }
 
     @Override

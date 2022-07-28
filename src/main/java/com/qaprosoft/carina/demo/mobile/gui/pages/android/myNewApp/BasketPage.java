@@ -3,6 +3,7 @@ package com.qaprosoft.carina.demo.mobile.gui.pages.android.myNewApp;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.BasketPageBase;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,8 @@ public class BasketPage extends BasketPageBase implements IMobileUtils {
 
     @FindBy(xpath= "//android.widget.TextView[@content-desc=\"Removes product from cart\"]")
     ExtendedWebElement removeItemBtn;
+    @FindBy(id = "com.saucelabs.mydemoapp.android:id/priceTV")
+    ExtendedWebElement productCost;
 
     @FindBy(id = "com.saucelabs.mydemoapp.android:id/totalPriceTV")
     ExtendedWebElement finalSum;
@@ -27,7 +30,8 @@ public class BasketPage extends BasketPageBase implements IMobileUtils {
     @Override
     public Double costOfProduct() {
 
-        return null;
+        double sum = Double.parseDouble(StringUtils.substring((productCost.format().getAttribute("value")), 1));
+        return sum;
     }
 
     @Override
@@ -37,7 +41,7 @@ public class BasketPage extends BasketPageBase implements IMobileUtils {
 
     @Override
     public boolean isBasketEmpty() {
-        return false;
+        return goShoppingBtn.isElementPresent();
     }
 
     @Override
