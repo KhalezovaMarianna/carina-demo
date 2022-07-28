@@ -1,12 +1,14 @@
 package com.qaprosoft.carina.demo.mobile.gui.pages.ios.myNewAppIOS;
 
+import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.AboutPageBase;
+import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.BasketPageBase;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.HomePageBase;
 import org.openqa.selenium.WebDriver;
-
+@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = AboutPageBase.class)
 public class AboutPage extends AboutPageBase implements IMobileUtils {
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == \"About-screen\"`]/XCUIElementTypeImage[3]")
     ExtendedWebElement aboutPicture;

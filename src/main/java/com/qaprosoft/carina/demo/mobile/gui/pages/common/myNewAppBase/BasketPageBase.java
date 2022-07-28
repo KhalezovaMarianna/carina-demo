@@ -7,10 +7,12 @@ public abstract class BasketPageBase extends AbstractPage {
     public BasketPageBase(WebDriver driver) {
         super(driver);
     }
-    public abstract boolean isBasketPageOpen();
+    public abstract Double costOfProduct();
+    public abstract boolean isBasketPageOpened();
+    public abstract boolean isBasketEmpty();
     public abstract BasketPageBase clickGoShoppingBtn();
     public abstract BasketPageBase goToCart();
-    public abstract boolean endSumComparison();
+    public abstract Double endSumComparison();
     public abstract void removeItemFromCart();
     public abstract boolean isCartEmpty();
 }

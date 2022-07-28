@@ -17,4 +17,6 @@ public abstract class ProductPageBase extends AbstractPage {
 
     public abstract void addToCart();
     public abstract MorePageBase openMorePage();
+
+    public abstract void addSeveralProducts(int i);
 }

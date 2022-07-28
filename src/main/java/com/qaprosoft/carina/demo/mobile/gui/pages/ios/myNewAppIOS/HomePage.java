@@ -52,7 +52,7 @@ public class HomePage extends HomePageBase implements IMobileUtils {
             randomProduct.format(title).click();
         }
         //return initPage(getDriver(), ProductPageBase.class);
-        return initPage(getDriver(),ProductPageBase.class);
+        return initPage(getDriver(), ProductPageBase.class);
     }
 
     public ProductPage clickProductByIndex(String title) {

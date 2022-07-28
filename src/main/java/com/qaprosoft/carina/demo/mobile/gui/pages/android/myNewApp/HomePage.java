@@ -7,6 +7,7 @@ import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.MyPhotoPageBase;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.BasketPageBase;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.HomePageBase;
+import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.MorePageBase;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.ProductPageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -29,9 +30,24 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     }
 
     @Override
+    public MorePageBase clickMoreBtn() {
+        return null;
+    }
+
+    @Override
     public BasketPageBase clickBasketBtn() {
         basketBtn.click();
         return new BasketPage(getDriver());
+    }
+
+    @Override
+    public ProductPageBase clickProductImg(String a) {
+        return null;
+    }
+
+    @Override
+    public ProductPageBase clickProductByIndex(String a) {
+        return null;
     }
 
     @Override

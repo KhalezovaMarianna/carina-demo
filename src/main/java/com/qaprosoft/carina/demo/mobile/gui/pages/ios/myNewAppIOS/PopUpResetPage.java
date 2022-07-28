@@ -9,20 +9,34 @@ import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.PopUpReset
 import org.openqa.selenium.WebDriver;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = PopUpResetPageBase.class)
-public class PopUpResetPage extends PopUpResetPageBase{
+public class PopUpResetPage extends PopUpResetPageBase {
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeButton[`label contains \"%s\"`]")
-    ExtendedWebElement chosenBtn;
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeButton[`label == \"RESET APP\"`]")
+    ExtendedWebElement resetBtn;
+
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeButton[`label == \"CANCEL\"`]")
+    ExtendedWebElement continueBtn;
+
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeButton[`label == \"OK\"`]")
+    ExtendedWebElement okBtn;
 
     public PopUpResetPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public MorePageBase clickResetBtn(String title) {
-        if(title.equals("CANCEL")){
-            chosenBtn.format(title).click();
+    public MorePageBase clickResetBtn() {
+        {
+            resetBtn.click();
+            okBtn.clickIfPresent();
+
         }
-        return initPage(getDriver(),MorePageBase.class);
+        return initPage(getDriver(), MorePageBase.class);
+    }
+
+    @Override
+    public boolean isPopUpResetPageOpen() {
+
+        return resetBtn.isElementPresent();
     }
 }

@@ -3,7 +3,6 @@ package com.qaprosoft.carina.demo.mobile.gui.pages.android.myNewApp;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.BasketPageBase;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
@@ -26,16 +25,27 @@ public class BasketPage extends BasketPageBase implements IMobileUtils {
     }
 
     @Override
-    public boolean isBasketPageOpen() {
+    public Double costOfProduct() {
+
+        return null;
+    }
+
+    @Override
+    public boolean isBasketPageOpened() {
         return goShoppingBtn.isElementPresent();
     }
 
-   @Override
+    @Override
+    public boolean isBasketEmpty() {
+        return false;
+    }
+
+    @Override
     public BasketPageBase clickGoShoppingBtn() {
        goShoppingBtn.click();
         return new BasketPage(getDriver()) {
             @Override
-            public boolean isBasketPageOpen() {
+            public boolean isBasketPageOpened() {
                 return false;
             }
         };
@@ -47,12 +57,9 @@ public class BasketPage extends BasketPageBase implements IMobileUtils {
     }
 
     @Override
-    public boolean endSumComparison() {
+    public Double endSumComparison() {
         double sum = Double.parseDouble(StringUtils.substring((finalSum.format("$39.96").getAttribute("value")), 1));
-        if (sum > 0) {
-            return true;
-        }
-        return false;
+       return sum;
     }
 
     @Override

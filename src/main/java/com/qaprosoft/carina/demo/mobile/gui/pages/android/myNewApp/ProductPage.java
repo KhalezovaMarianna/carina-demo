@@ -52,11 +52,10 @@ public class ProductPage extends ProductPageBase implements IMobileUtils {
         return initPage(getDriver(), BasketPageBase.class);
     }
 
-    public boolean addSeveralProducts(int amount) {
-        for (int i = 1; i <= amount; i++) {
+    public void addSeveralProducts(int amount) {
+        for (int i = 1; i < amount; i++) {
             plusBtn.click();
         }
-        return true;
     }
     @Override
     public void addToCart() {

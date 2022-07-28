@@ -8,5 +8,6 @@ public abstract class PopUpResetPageBase extends AbstractPage {
     public PopUpResetPageBase(WebDriver driver) {
         super(driver);
     }
-    public abstract MorePageBase clickResetBtn(String title);
+    public abstract MorePageBase clickResetBtn();
+    public abstract boolean isPopUpResetPageOpen();
 }

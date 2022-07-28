@@ -1,13 +1,18 @@
 package com.qaprosoft.carina.demo.mobile.gui.pages.ios.myNewAppIOS;
 
+import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.BasketPageBase;
+import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.HomePageBase;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.MorePageBase;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.myNewAppBase.ProductPageBase;
 import org.openqa.selenium.WebDriver;
 
+@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = ProductPageBase.class)
 public class ProductPage extends ProductPageBase {
+
+
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeButton[`label == \"AddPlus Icons\"`]")
     ExtendedWebElement plusBtn;
 
@@ -45,36 +50,25 @@ public class ProductPage extends ProductPageBase {
     public void addProduct() {
         plusBtn.click();
         addToCartBtn.click();
-        return;
     }
 
     @Override
-    public BasketPage goToCart() {
+    public BasketPageBase goToCart() {
         basketBtn.click();
-        return new BasketPage(getDriver()) {
-            @Override
-            public boolean isBasketPageOpen() {
-                return false;
-            }
-
-            @Override
-            public BasketPageBase goToCart() {
-                return null;
-            }
-        };
+        return initPage(getDriver(), BasketPageBase.class);
     }
 
 
-    public boolean addSeveralProducts(int amount) {
-        for (int i = 1; i <= amount; i++) {
+    public void addSeveralProducts(int amount) {
+        for (int i = 1; i < amount; i++) {
             plusBtn.click();
         }
-        return true;
     }
 
     public void addToCart() {
         addToCartBtn.click();
     }
+
 
     @Override
     public MorePageBase openMorePage() {

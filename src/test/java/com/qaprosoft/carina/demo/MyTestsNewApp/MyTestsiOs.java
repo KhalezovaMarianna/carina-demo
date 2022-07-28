@@ -1,5 +1,6 @@
 package com.qaprosoft.carina.demo.MyTestsNewApp;
 
+import com.mongodb.DBPortPool;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
@@ -19,7 +20,7 @@ public class MyTestsiOs implements IAbstractTest, IMobileUtils {
     public void testOpenPages() {
         HomePageBase homePage = initPage(getDriver(),HomePageBase.class);
         BasketPageBase basketPage = homePage.clickBasketBtn();
-        Assert.assertTrue(basketPage.isBasketPageOpen(),
+        Assert.assertTrue(basketPage.isBasketPageOpened(),
                 "Page isn't opened");
         basketPage.clickGoShoppingBtn();
         Assert.assertFalse(homePage.isHomePageOpen(),
@@ -62,14 +63,26 @@ public class MyTestsiOs implements IAbstractTest, IMobileUtils {
     @MethodOwner(owner = "qpsdemo")
     @TestLabel(name = "feature", value = {"mobile", "regression"})
     public void testAmountCartAdded() {
-        HomePage homePage = new HomePage(getDriver());
+        List<String> products = new ArrayList<>();
+        products.add("Sauce Lab Back Packs");
+        products.add("Sauce Lab Bike Light");
+        products.add("Sauce Lab Bolt T-Shirt");
+        products.add("Sauce Lab Fleece T-Shirt");
+        products.add("Sauce Lab Onesie");
+        products.add("Test");
+        var random = new SecureRandom();
+        int randomIndex = random.nextInt(products.size());
+        String title = String.valueOf(products.get(randomIndex));
+        HomePageBase homePage = initPage(getDriver(),HomePageBase.class);
         Assert.assertTrue(homePage.isHomePageOpen(), "HomePage isn't open");
-        ProductPage productPage = homePage.clickProductImg("2");
-        Assert.assertTrue(productPage.isProductPageOpen(), "right product isn't open");
-        productPage.addSeveralProducts(3);
+        ProductPageBase productPage = homePage.clickRandomProduct(title);
+        Assert.assertTrue(productPage.isProductPageOpen(), "Product isn't open");
+        int amount = (int) (Math.random()*10);
+        productPage.addSeveralProducts(amount);
         productPage.addToCart();
         BasketPageBase basketPage = productPage.goToCart();
-        Assert.assertTrue(basketPage.endSumComparison());
+        double teoreticFinalCost = amount * basketPage.costOfProduct();
+        Assert.assertEquals(teoreticFinalCost,basketPage.endSumComparison(),"Sum isn't increase" );
 
     }
 
@@ -77,11 +90,22 @@ public class MyTestsiOs implements IAbstractTest, IMobileUtils {
     @MethodOwner(owner = "qpsdemo")
     @TestLabel(name = "feature", value = {"mobile", "regression"})
     public void testRemoveItemFromCart() {
-        HomePage homePage = new HomePage(getDriver());
+        List<String> products = new ArrayList<>();
+        products.add("Sauce Lab Back Packs");
+        products.add("Sauce Lab Bike Light");
+        products.add("Sauce Lab Bolt T-Shirt");
+        products.add("Sauce Lab Fleece T-Shirt");
+        products.add("Sauce Lab Onesie");
+        products.add("Test");
+        var random = new SecureRandom();
+        int randomIndex = random.nextInt(products.size());
+        String title = String.valueOf(products.get(randomIndex));
+        HomePageBase homePage = initPage(getDriver(),HomePageBase.class);
         Assert.assertTrue(homePage.isHomePageOpen(), "HomePage isn't open");
-        ProductPage productPage = homePage.clickProductImg("2");
-        Assert.assertTrue(productPage.isProductPageOpen(), "right product isn't open");
-        productPage.addSeveralProducts(3);
+        ProductPageBase productPage = homePage.clickRandomProduct(title);
+        Assert.assertTrue(productPage.isProductPageOpen(), "Product isn't open");
+        int amount = (int) (Math.random()*10);
+        productPage.addSeveralProducts(amount);
         productPage.addToCart();
         BasketPageBase basketPage = productPage.goToCart();
         basketPage.removeItemFromCart();
@@ -109,11 +133,11 @@ public class MyTestsiOs implements IAbstractTest, IMobileUtils {
         productPage.addToCart();
         MorePageBase morePage = productPage.openMorePage();
         PopUpResetPageBase resetPage = morePage.resetApp();
-        Assert.assertTrue(resetPage.isPageOpened(),"");
+        resetPage.clickResetBtn();
+        Assert.assertTrue(morePage.isMorePageOpen(),"morePage isn't open");
+        BasketPageBase basketPage = morePage.openCart();
+        Assert.assertTrue(basketPage.isBasketEmpty());
 
-
-
-       // Assert.assertTrue(productPage.isProductPageOpen());
 
     }
 
