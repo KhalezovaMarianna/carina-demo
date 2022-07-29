@@ -10,6 +10,7 @@ public abstract class ProductPageBase extends AbstractPage {
     }
     public abstract boolean isProductPageOpen();
     public abstract void addProduct();
+    public abstract void deleteSeveralProducts(int title);
 
     public abstract BasketPageBase goToCart();
 

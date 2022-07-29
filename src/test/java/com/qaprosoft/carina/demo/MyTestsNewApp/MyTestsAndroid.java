@@ -16,7 +16,7 @@ public class MyTestsAndroid implements IAbstractTest, IMobileUtils {
     public void testOpenPages() {
         HomePage homePage = new HomePage(getDriver());
         BasketPageBase basketPage = homePage.clickBasketBtn();
-        Assert.assertTrue(basketPage.isBasketPageOpen(),
+        Assert.assertTrue(basketPage.isBasketPageOpened(),
                 "Page isn't opened");
 
     }

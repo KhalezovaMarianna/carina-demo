@@ -10,6 +10,7 @@ public abstract class BasketPageBase extends AbstractPage {
     public abstract Double costOfProduct();
     public abstract boolean isBasketPageOpened();
     public abstract boolean isBasketEmpty();
+    public abstract boolean oneProductInCart();
     public abstract BasketPageBase clickGoShoppingBtn();
     public abstract BasketPageBase goToCart();
     public abstract Double endSumComparison();

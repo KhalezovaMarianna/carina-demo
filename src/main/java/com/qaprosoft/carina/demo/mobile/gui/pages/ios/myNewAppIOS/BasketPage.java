@@ -19,6 +19,8 @@ public class BasketPage extends BasketPageBase implements IMobileUtils {
     ExtendedWebElement goShoppingBtn;
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeStaticText[`label CONTAINS \"$\"`]")
     ExtendedWebElement finalSum;
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeStaticText[`label == \"1\"`][1]")
+    ExtendedWebElement oneElement;
 
     public BasketPage(WebDriver driver) {
         super(driver);
@@ -27,6 +29,10 @@ public class BasketPage extends BasketPageBase implements IMobileUtils {
     @Override
     public boolean isBasketPageOpened() {
         return goShoppingBtn.isElementPresent();
+    }
+    @Override
+    public boolean oneProductInCart() {
+        return oneElement.isElementPresent();
     }
 
     @Override

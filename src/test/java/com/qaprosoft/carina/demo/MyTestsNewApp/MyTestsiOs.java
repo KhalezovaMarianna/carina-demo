@@ -23,8 +23,8 @@ public class MyTestsiOs implements IAbstractTest, IMobileUtils {
         Assert.assertTrue(basketPage.isBasketPageOpened(),
                 "Page isn't opened");
         basketPage.clickGoShoppingBtn();
-        Assert.assertFalse(homePage.isHomePageOpen(),
-                "homePage is open");
+        Assert.assertTrue(homePage.isHomePageOpen(),
+                "homePage isn't open");
         MorePageBase morePage = homePage.clickMoreBtn();
         Assert.assertTrue(morePage.isMorePageOpen(),
                 "morePage isn't open");
@@ -35,7 +35,7 @@ public class MyTestsiOs implements IAbstractTest, IMobileUtils {
         Assert.assertFalse(homePage.isHomePageOpen(),
                 "HOMEPage is not open");
         morePage.clickCatalogBtn();
-        Assert.assertFalse(homePage.isHomePageOpen(),
+        Assert.assertTrue(homePage.isHomePageOpen(),
                 "Catalog isn't open");
         ProductPageBase productPage = homePage.clickProductImg("3");
         productPage.addProduct();
@@ -140,7 +140,33 @@ public class MyTestsiOs implements IAbstractTest, IMobileUtils {
 
 
     }
+    @Test
+    @MethodOwner(owner = "qpsdemo")
+    @TestLabel(name = "feature", value = {"mobile", "regression"})
+    public void testCheckAmountCartAddedAndSubstracted () {
+        List<String> products = new ArrayList<>();
+        products.add("Sauce Lab Back Packs");
+        products.add("Sauce Lab Bike Light");
+        products.add("Sauce Lab Bolt T-Shirt");
+        products.add("Sauce Lab Fleece T-Shirt");
+        products.add("Sauce Lab Onesie");
+        products.add("Test");
+        var random = new SecureRandom();
+        int randomIndex = random.nextInt(products.size());
+        String title = String.valueOf(products.get(randomIndex));
+        HomePageBase homePage = initPage(getDriver(),HomePageBase.class);
+        Assert.assertTrue(homePage.isHomePageOpen(), "HomePage isn't open");
+        ProductPageBase productPage = homePage.clickRandomProduct(title);
+        Assert.assertTrue(productPage.isProductPageOpen(), "Product isn't open");
+        int amount = (int) (Math.random()*10);
+        productPage.addSeveralProducts(5);
+        productPage.deleteSeveralProducts(5);
+        productPage.addToCart();
+        BasketPageBase basketPageBase= productPage.goToCart();
+        Assert.assertTrue(basketPageBase.oneProductInCart(),"cart hasn't one product");
 
+
+    }
 
 }
 

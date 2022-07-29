@@ -33,7 +33,10 @@ public class BasketPage extends BasketPageBase implements IMobileUtils {
         double sum = Double.parseDouble(StringUtils.substring((productCost.format().getAttribute("value")), 1));
         return sum;
     }
-
+    @Override
+    public boolean oneProductInCart() {
+        return false;
+    }
     @Override
     public boolean isBasketPageOpened() {
         return goShoppingBtn.isElementPresent();

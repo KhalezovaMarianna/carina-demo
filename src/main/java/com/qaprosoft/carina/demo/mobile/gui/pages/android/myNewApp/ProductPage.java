@@ -47,6 +47,11 @@ public class ProductPage extends ProductPageBase implements IMobileUtils {
     }
 
     @Override
+    public void deleteSeveralProducts(int title) {
+
+    }
+
+    @Override
     public BasketPageBase goToCart() {
         basketBtn.click();
         return initPage(getDriver(), BasketPageBase.class);
